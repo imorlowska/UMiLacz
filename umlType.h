@@ -7,6 +7,28 @@ class umlType
 {
     protected:
         typeKinds typeKind;
+    public:
+        virtual string getString() = 0;
+};
+
+class umlInternalType:public umlType
+{
+    private:
+        string name;
+    public:
+        umlInternalType()
+        {
+            typeKind = internal_;
+        }
+        umlInternalType* setType(string s)
+        {
+            name = s;
+            return this;
+        }
+        string getString()
+        {
+            return name;
+        }
 };
 
 class umlSimpleType:public umlType
@@ -26,6 +48,10 @@ class umlSimpleType:public umlType
         simpleType getType()
         {
             return name;
+        }
+        string getString()
+        {
+            return getStringT(name);
         }
 };
 
@@ -48,6 +74,10 @@ class umlUnaryType:public umlType
         pair<complexTypeUnary, umlType*> getType()
         {
             return pair<complexTypeUnary,umlType*>(name, inside);
+        }
+        string getString()
+        {
+            return getStringT(name) + "< " + inside->getString() + " >";
         }
 };
 
@@ -73,6 +103,11 @@ class umlBinaryType:public umlType
         {
             return pair<complexTypeBinary, pair<umlType*,umlType*> >
                     (name, pair<umlType*,umlType*> (insideFirst, insideSecond));
+        }
+        string getString()
+        {
+            return getStringT(name) + "< " + insideFirst->getString()
+                                    + ", " + insideSecond->getString() + " >";
         }
 };
 

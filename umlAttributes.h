@@ -11,6 +11,11 @@ class umlAttributes
         umlType* type;
         list<specialType> sType;
     public:
+        umlAttributes()
+        {
+            name = "foo";
+            accessability_ = none_;
+        }
         umlAttributes* setName(string n)
         {
             name = n;
@@ -29,6 +34,7 @@ class umlAttributes
         umlAttributes* addSpecialType(specialType s)
         {
             sType.push_back(s);
+            return this;
         }
         void removeSpecialType(specialType s)
         {
@@ -52,6 +58,17 @@ class umlAttributes
             return sType;
         }
 
+        string getString()
+        {
+            string tmp;
+            for (list<specialType>::iterator it = sType.begin();
+                    it != sType.end(); ++it)
+            {
+                tmp += getStringT(*it);
+            }
+            return getStringT(accessability_) + tmp + type->getString() + " "
+                            + name;
+        }
 };
 
 #endif

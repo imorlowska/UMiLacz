@@ -12,6 +12,7 @@ class umlFunction
         list<specialType> sType;
         list<umlAttributes*> params;
     public:
+        umlFunction(){};
         umlFunction* setName(string n)
         {
             name = n;
@@ -30,14 +31,16 @@ class umlFunction
         umlFunction* addSpecialType(specialType s)
         {
             sType.push_back(s);
+            return this;
         }
         void removeSpecialType(specialType s)
         {
             sType.remove(s);
         }
-        void addParam(umlAttributes* p)
+        umlFunction* addParam(umlAttributes* p)
         {
             params.push_back(p);
+            return this;
         }
         void removeParam(umlAttributes* p)
         {
@@ -63,6 +66,29 @@ class umlFunction
         list<umlAttributes*> getParams()
         {
             return params;
+        }
+        string getString()
+        {
+            string spec;
+            for (list<specialType>::iterator it = sType.begin();
+                    it != sType.end(); ++it)
+            {
+                spec += getStringT(*it);
+            }
+            string param;
+            for (list<umlAttributes*>::iterator it = params.begin();
+                    it != params.end(); ++it)
+            {
+                param += (*it)->getString() + ", ";
+            }
+            if(param.length()>2)
+            {
+                param.erase(param.length()-2, param.length());
+            }
+            param = "(" + param + ")";
+
+            return getStringT(accessability_) + spec + type->getString() + " "
+                            + name + param;
         }
 };
 

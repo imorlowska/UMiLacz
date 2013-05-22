@@ -1,7 +1,7 @@
 #ifndef UMLCLASS_H
 #define UMLCLASS_H
 
-#include "umlAttributes.h"
+#include "umlFunction.h"
 
 class umlClass
 {
