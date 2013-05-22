@@ -12,7 +12,6 @@ class umlFunction
         list<specialType> sType;
         list<umlAttributes*> params;
     public:
-        umlFunction(){};
         umlFunction* setName(string n)
         {
             name = n;
@@ -33,18 +32,20 @@ class umlFunction
             sType.push_back(s);
             return this;
         }
-        void removeSpecialType(specialType s)
+        umlFunction* removeSpecialType(specialType s)
         {
             sType.remove(s);
+            return this;
         }
         umlFunction* addParam(umlAttributes* p)
         {
             params.push_back(p);
             return this;
         }
-        void removeParam(umlAttributes* p)
+        umlFunction* removeParam(umlAttributes* p)
         {
             params.remove(p);
+            return this;
         }
 
         string getName()

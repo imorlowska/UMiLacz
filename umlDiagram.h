@@ -11,29 +11,28 @@ class umlDiagram
               pair<connectionType, connectionNumber> > dependencies;
         string name;
     public:
-        umlDiagram(string name)
-        {
-            this->name = name;
-        }
-        void addClass(umlClass* c)
+        umlDiagram* addClass(umlClass* c)
         {
             classes.push_back(c);
+            return this;
         }
         void removeClass(umlClass* c)
         {
             classes.remove(c);
         }
-        void rename(string name)
+        umlDiagram* setName(string name)
         {
             this->name = name;
+            return this;
         }
-        void addDependencies(umlClass* c1, umlClass* c2, connectionType ct,
+        umlDiagram* addDependency(umlClass* c1, umlClass* c2, connectionType ct,
                              connectionNumber cn)
         {
             dependencies.insert(pair <pair <umlClass*, umlClass*>,
                                       pair<connectionType, connectionNumber> >
                                 (pair<umlClass*,umlClass*>(c1,c2),
                                  pair<connectionType,connectionNumber>(ct,cn)));
+            return this;
         }
         string getName()
         {
@@ -49,6 +48,17 @@ class umlDiagram
             return dependencies;
         }
 
+        string getString()
+        {
+            string tmp = "Diagram: " + name + "\n\nClasses\n";
+
+            for (list<umlClass*>::iterator it = classes.begin();
+                    it != classes.end(); ++it)
+            {
+                tmp += "\t" + (*it)->getString() + "\n";
+            }
+            return tmp;
+        }
 };
 
 #endif
