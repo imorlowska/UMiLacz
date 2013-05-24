@@ -16,19 +16,9 @@ class umlInternalType:public umlType
     private:
         string name;
     public:
-        umlInternalType()
-        {
-            typeKind = internal_;
-        }
-        umlInternalType* setType(string s)
-        {
-            name = s;
-            return this;
-        }
-        string getString()
-        {
-            return name;
-        }
+        umlInternalType();
+        umlInternalType* setType(string s);
+        string getString();
 };
 
 class umlSimpleType:public umlType
@@ -36,23 +26,10 @@ class umlSimpleType:public umlType
     private:
         simpleType name;
     public:
-        umlSimpleType()
-        {
-            typeKind = simple_;
-        }
-        umlSimpleType* setType(simpleType t)
-        {
-            name = t;
-            return this;
-        }
-        simpleType getType()
-        {
-            return name;
-        }
-        string getString()
-        {
-            return getStringT(name);
-        }
+        umlSimpleType();
+        umlSimpleType* setType(simpleType t);
+        simpleType getType();
+        string getString();
 };
 
 class umlUnaryType:public umlType
@@ -61,24 +38,10 @@ class umlUnaryType:public umlType
         complexTypeUnary name;
         umlType* inside;
     public:
-        umlUnaryType()
-        {
-            typeKind = unary_;
-        }
-        umlUnaryType* setType(complexTypeUnary t, umlType* i)
-        {
-            name = t;
-            inside = i;
-            return this;
-        }
-        pair<complexTypeUnary, umlType*> getType()
-        {
-            return pair<complexTypeUnary,umlType*>(name, inside);
-        }
-        string getString()
-        {
-            return getStringT(name) + "< " + inside->getString() + " >";
-        }
+        umlUnaryType();
+        umlUnaryType* setType(complexTypeUnary t, umlType* i);
+        pair<complexTypeUnary, umlType*> getType();
+        string getString();
 };
 
 class umlBinaryType:public umlType
@@ -88,27 +51,10 @@ class umlBinaryType:public umlType
         umlType* insideFirst;
         umlType* insideSecond;
     public:
-        umlBinaryType()
-        {
-            typeKind = binary_;
-        }
-        umlBinaryType* setType(complexTypeBinary t, umlType* i1, umlType* i2)
-        {
-            name = t;
-            insideFirst = i1;
-            insideSecond = i2;
-            return this;
-        }
-        pair<complexTypeBinary,pair<umlType*,umlType*> > getType()
-        {
-            return pair<complexTypeBinary, pair<umlType*,umlType*> >
-                    (name, pair<umlType*,umlType*> (insideFirst, insideSecond));
-        }
-        string getString()
-        {
-            return getStringT(name) + "< " + insideFirst->getString()
-                                    + ", " + insideSecond->getString() + " >";
-        }
+        umlBinaryType();
+        umlBinaryType* setType(complexTypeBinary t, umlType* i1, umlType* i2);
+        pair<complexTypeBinary,pair<umlType*,umlType*> > getType();
+        string getString();
 };
 
 #endif
