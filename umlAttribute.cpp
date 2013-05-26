@@ -1,7 +1,7 @@
 #include "umlAttribute.h"
 
 
-umlAttribute::umlAttribute()
+umlAttribute::umlAttribute():type(nullptr)
 {
     name = "foo";
     accessability_ = none_;
@@ -56,6 +56,7 @@ string umlAttribute::getString()
     {
         tmp += getStringT(*it);
     }
-    return getStringT(accessability_) + tmp + type->getString() + " "
+	string typeStr = type==nullptr?"":type->getString();
+	return getStringT(accessability_) + tmp+ "" + typeStr + " "
                     + name;
 }

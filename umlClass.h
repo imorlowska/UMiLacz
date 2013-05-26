@@ -24,8 +24,9 @@ class umlClass
         umlClass* removeFunction(umlFunction* f);
         string getName();
         accessability getAccessability();
-        list<specialType> getSpecialType();
-        list<umlAttribute*> getAttributes();
+        list<specialType>& getSpecialType();
+        list<umlAttribute*>& getAttributes();
+		list<umlFunction*>& getFunctions();
         string getString();
 };
 

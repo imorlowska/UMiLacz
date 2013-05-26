@@ -53,13 +53,18 @@ accessability umlClass::getAccessability()
 {
     return accessability_;
 }
-list<specialType> umlClass::getSpecialType()
+list<specialType>& umlClass::getSpecialType()
 {
     return sType;
 }
-list<umlAttribute*> umlClass::getAttributes()
+list<umlAttribute*>& umlClass::getAttributes()
 {
     return attributes;
+}
+
+list<umlFunction*>& umlClass::getFunctions()
+{
+	return functions;
 }
 string umlClass::getString()
 {

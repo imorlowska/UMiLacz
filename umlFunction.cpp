@@ -1,6 +1,6 @@
 #include "umlFunction.h"
 
-umlFunction::umlFunction()
+umlFunction::umlFunction():type(nullptr)
 {
     name = "foo";
     accessability_ = none_;
@@ -82,6 +82,15 @@ string umlFunction::getString()
     }
     param = "(" + param + ")";
 
-    return getStringT(accessability_) + spec + type->getString() + " "
+	string typeString;
+	if(type==nullptr)
+	{
+		typeString="void";
+	}
+	else
+	{
+		typeString=type->getString();
+	}
+	return getStringT(accessability_) +" " + spec +" "+ typeString + " "
                     + name + param;
 }
