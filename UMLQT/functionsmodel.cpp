@@ -22,5 +22,5 @@ list<umlFunction *> FunctionsModel::getFunctions()
 	{
 		functions.push_back(((QFunction*)*it)->getFunction());
 	}
-	return functions;
+	return std::move(functions);
 }

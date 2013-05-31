@@ -13,8 +13,8 @@ class QClass:public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(QString name READ getName WRITE setName NOTIFY nameChanged)
-	//Q_PROPERTY(FunctionsModel functions READ getFunctions)
-	//Q_PROPERTY(AttributesModel attributes READ getAttributes)
+	Q_PROPERTY(FunctionsModel* functions READ getFunctions)
+	Q_PROPERTY(AttributesModel* attributes READ getAttributes)
 private:
 	umlClass* myClass;
 	FunctionsModel functions;
@@ -24,9 +24,10 @@ public:
 	QString getName()const;
 	void setName(const QString& n);
 
-	FunctionsModel&  getFunctions(){return functions;}
-	AttributesModel&  getAttributes(){return attributes;}
+	FunctionsModel*  getFunctions(){return &functions;}
+	AttributesModel*  getAttributes(){return &attributes;}
 
+	umlClass* getClass(){return myClass;}
 
 
 signals:

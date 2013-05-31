@@ -21,5 +21,5 @@ list<umlAttribute *> AttributesModel::getAttributes()
 	{
 		attributes.push_back(((QAttribute*)*it)->getAttribute());
 	}
-	return attributes;
+	return std::move(attributes);
 }

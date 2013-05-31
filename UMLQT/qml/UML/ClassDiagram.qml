@@ -8,9 +8,12 @@ Rectangle
 	color: "#13adbb"
     property int minWidth:100
     property int minHeight:50
+	property alias mouseArea:maMain
     radius: 16
 
-	//property variant classDummy: myClass
+	property variant myClass
+	property variant myAttributes
+	property variant myFunctions
 	//color:myClass.backgroundColor
 
     onWidthChanged:
@@ -27,6 +30,7 @@ Rectangle
 
     MouseArea
     {
+		id:maMain
         anchors.fill: parent
         drag.target: mainRectangle
         drag.axis: Drag.XandYAxis
@@ -122,8 +126,8 @@ Rectangle
 
 				mouseArea.onClicked:
 				{
-					listView.currentIndex=listView.count-1
-					myFunctions.addEmpty()
+					myFunctions.addEmpty();
+					listView.currentIndex=listView.count-1;
 
 				}
 
@@ -151,8 +155,8 @@ ListWithAdd
 
 	mouseArea.onClicked:
 	{
-		listView.currentIndex=listView.count-1
-		myAttributes.addEmpty()
+		myAttributes.addEmpty();
+		listView.currentIndex=listView.count-1;
 
 	}
 }

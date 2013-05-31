@@ -100,7 +100,7 @@ Q_SIGNALS:
     void countChanged();
 
 private:
-	Q_DISABLE_COPY(QObjectListModel)
+	//Q_DISABLE_COPY(QObjectListModel)
 protected:
 	QObjectList* m_objects;
 };

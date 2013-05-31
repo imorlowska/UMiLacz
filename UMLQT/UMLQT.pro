@@ -28,7 +28,10 @@ SOURCES += main.cpp \
     qfunction.cpp \
     qclass.cpp \
     attributesmodel.cpp \
-    qattribute.cpp
+    qattribute.cpp \
+    qdiagram.cpp \
+    classesmodel.cpp \
+    ../umlDiagram.cpp
 
 # Installation path
 # target.path =
@@ -48,6 +51,9 @@ HEADERS += \
     qfunction.h \
     qclass.h \
     attributesmodel.h \
-    qattribute.h
+    qattribute.h \
+    qdiagram.h \
+    classesmodel.h \
+    ../umlDiagram.h
 
 
