@@ -27,10 +27,10 @@
 1369414587 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\main.cpp
 	"facade.h"
 
-1369428133 c:\users\izabela\desktop\projects\bitbucket\umilacz\umldiagram.h
+1370375073 c:\users\izabela\desktop\projects\bitbucket\umilacz\umldiagram.h
 	"umlClass.h"
 
-1369427971 c:\users\izabela\desktop\projects\bitbucket\umilacz\umlclass.h
+1369591526 c:\users\izabela\desktop\projects\bitbucket\umilacz\umlclass.h
 	"umlFunction.h"
 
 1369339406 c:\users\izabela\desktop\projects\bitbucket\umilacz\umlattributes.h
@@ -42,11 +42,13 @@
 1369426749 c:\users\izabela\desktop\projects\bitbucket\umilacz\typedefs.h
 	"includes.h"
 
-1368181262 c:\users\izabela\desktop\projects\bitbucket\umilacz\includes.h
+1370374751 c:\users\izabela\desktop\projects\bitbucket\umilacz\includes.h
 	<list>
 	<iostream>
 	<map>
 	<string>
+	<iostream>
+	<fstream>
 
 1369427790 c:\users\izabela\desktop\projects\bitbucket\umilacz\umlfunction.h
 	"umlAttribute.h"
@@ -57,10 +59,11 @@
 1369339581 c:\users\izabela\desktop\projects\bitbucket\umilacz\umlattributes.cpp
 	"typedefs.h"
 
-1369428211 c:\users\izabela\desktop\projects\bitbucket\umilacz\facade.h
-	"umlDiagram.h"
+1370372042 c:\users\izabela\desktop\projects\bitbucket\umilacz\facade.h
+	"converter2cpp.h"
 
-1369426570 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\facade.cpp
+1369428199 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\facade.cpp
+	"facade.h"
 
 1369426727 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\typedefs.cpp
 	"typedefs.h"
@@ -71,15 +74,24 @@
 1369427546 c:\users\izabela\desktop\projects\bitbucket\umilacz\umlattribute.h
 	"umlType.h"
 
-1369427455 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umlattribute.cpp
+1369591526 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umlattribute.cpp
 	"umlAttribute.h"
 
-1369427747 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umlfunction.cpp
+1369591526 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umlfunction.cpp
 	"umlFunction.h"
 
-1369428003 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umlclass.cpp
+1369591526 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umlclass.cpp
 	"umlClass.h"
 
-1369428099 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umldiagram.cpp
+1370375156 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umldiagram.cpp
 	"umlDiagram.h"
+
+1370371822 c:\users\izabela\desktop\projects\bitbucket\umilacz\umil.h
+	"umlDiagram.h"
+
+1370373915 c:\users\izabela\desktop\projects\bitbucket\umilacz\converter.h
+	"umlDiagram.h"
+
+1370374860 c:\users\izabela\desktop\projects\bitbucket\umilacz\converter2cpp.h
+	"converter.h"
 

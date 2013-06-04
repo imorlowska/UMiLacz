@@ -21,7 +21,7 @@ umlDiagram* umlDiagram::setName(string name)
 umlDiagram* umlDiagram::addDependency(umlClass* c1, umlClass* c2, connectionType ct,
                      connectionNumber cn)
 {
-    dependencies.insert(pair <pair <umlClass*, umlClass*>,
+    dependencies.push_back(pair <pair <umlClass*, umlClass*>,
                               pair<connectionType, connectionNumber> >
                         (pair<umlClass*,umlClass*>(c1,c2),
                          pair<connectionType,connectionNumber>(ct,cn)));
@@ -35,7 +35,7 @@ list<umlClass*> umlDiagram::getClasses()
 {
     return classes;
 }
-map<pair<umlClass*, umlClass*>,pair<connectionType, connectionNumber> >
+list <pair<pair<umlClass*,umlClass*>,pair<connectionType,connectionNumber> > >
     umlDiagram::getDependencies()
 {
     return dependencies;

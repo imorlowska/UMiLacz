@@ -1,7 +1,7 @@
 #ifndef FACADE_H
 #define FACADE_H
 
-#include "umlDiagram.h"
+#include "converter2cpp.h"
 
 
 class Facade
