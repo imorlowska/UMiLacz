@@ -54,7 +54,7 @@ void converter2cpp::fillPrivateAttributes(ofstream& file, umlClass* currentClass
         {
             string tmp = att->getString();
             tmp.erase(0, 7);
-            file << "\t\t" + trim(tmp) << endl;
+            file << "\t\t" + trim(tmp) + ";" << endl;
         }
     }
 }
@@ -66,7 +66,7 @@ void converter2cpp::fillPrivateFunctions(ofstream& file, umlClass* currentClass)
         {
             string tmp = func->getString();
             tmp.erase(0, 7);
-            file << "\t\t" + trim(tmp) << endl;
+            file << "\t\t" + trim(tmp) + ";" << endl;
         }
     }
 }
@@ -78,7 +78,7 @@ void converter2cpp::fillProtectedAttributes(ofstream& file, umlClass* currentCla
         {
             string tmp = att->getString();
             tmp.erase(0, 9);
-            file << "\t\t" + trim(tmp) << endl;
+            file << "\t\t" + trim(tmp) + ";" << endl;
         }
     }
 }
@@ -90,7 +90,7 @@ void converter2cpp::fillProtectedFunctions(ofstream& file, umlClass* currentClas
         {
             string tmp = func->getString();
             tmp.erase(0, 9);
-            file << "\t\t" + trim(tmp) << endl;
+            file << "\t\t" + trim(tmp) + ";" << endl;
         }
     }
 }
@@ -102,7 +102,7 @@ void converter2cpp::fillPublicAttributes(ofstream& file, umlClass* currentClass)
         {
             string tmp = att->getString();
             tmp.erase(0, 6);
-            file << "\t\t" + trim(tmp) << endl;
+            file << "\t\t" + trim(tmp) + ";" << endl;
         }
     }
 }
@@ -114,7 +114,7 @@ void converter2cpp::fillPublicFunctions(ofstream& file, umlClass* currentClass)
         {
             string tmp = func->getString();
             tmp.erase(0, 6);
-            file << "\t\t" + trim(tmp) << endl;
+            file << "\t\t" + trim(tmp) + ";" << endl;
         }
     }
 }

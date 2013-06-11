@@ -1,8 +1,11 @@
 
-public abstract MyClass
+public MyClass
 {
 	private:
-		static interface  pair< int, myType* > foo(int param1, myType* param2)
+		myType* attributeNb;
+		static  pair< int, myType* > foo(int param1, myType* param2);
 	protected:
+		string name;
 	public:
+		string foo2();
 };
