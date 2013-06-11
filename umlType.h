@@ -5,9 +5,8 @@
 
 class umlType
 {
-    protected:
-        typeKinds typeKind;
     public:
+        typeKinds typeKind;
         virtual string getString() = 0;
 };
 
@@ -43,6 +42,7 @@ class umlUnaryType:public umlType
         pair<complexTypeUnary, umlType*> getType();
         string getString();
 };
+
 
 class umlBinaryType:public umlType
 {

@@ -16,7 +16,9 @@ class umlAttribute
         umlAttribute* setAccessability(accessability a);
         umlAttribute* setType(umlType* t);
         umlAttribute* addSpecialType(specialType s);
+
         void removeSpecialType(specialType s);
+
         string getName();
         accessability getAccessability();
         umlType* getType();

@@ -7,9 +7,16 @@
 class converter2cpp: private converter
 {
     private:
-        list<fstream> files;
-        fstream* generateHeaderFile(umlClass* currentClass);
-        fstream* generateLibrariesHeader();
+        void generateHeaderFile(umlClass* currentClass);
+
+        void fillPrivateAttributes(ofstream& file, umlClass* currentClass);
+        void fillPrivateFunctions(ofstream& file, umlClass* currentClass);
+        void fillProtectedAttributes(ofstream& file, umlClass* currentClass);
+        void fillProtectedFunctions(ofstream& file, umlClass* currentClass);
+        void fillPublicAttributes(ofstream& file, umlClass* currentClass);
+        void fillPublicFunctions(ofstream& file, umlClass* currentClass);
+    public:
+        void convert(umlDiagram* diagram);
 };
 
 #endif

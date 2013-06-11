@@ -1,4 +1,5 @@
 #include "facade.h"
+#include "converter2cpp.h"
 
 Facade::Facade()
 {
@@ -30,13 +31,18 @@ void Facade::sample()
     umlClass* c = new umlClass();
     c->setName("MyClass")->setAccessability(public_)->addFunction(f)->
             addSpecialType(abstract_)->addAttribute(p1)->addAttribute(p2);
+    umlClass* c2 = new umlClass();
+    c2->setName("MyClass2")->setAccessability(private_)->addFunction(f)->
+            addSpecialType(static_)->addAttribute(p2);;
 
     //cout << c->getString() << endl;
 
     umlDiagram* d = new umlDiagram();
 
-    d->addClass(c)->addClass(c->removeAttribute(p2)->setName("Klasa2"))
-                                ->setName("Przykladowy");
+    d->addClass(c)->addClass(c2)->setName("Przykladowy");
 
-    cout << d->getString() << endl;
+    //cout << d->getString() << endl;
+
+    converter2cpp* cpp = new converter2cpp();
+    cpp->convert(d);
 }
