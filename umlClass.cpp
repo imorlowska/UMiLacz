@@ -6,7 +6,7 @@ umlClass::umlClass()
     accessability_ = none_;
 }
 
-umlClass* umlClass::setName(string n)
+umlClass* umlClass::setName(const string &n)
 {
     name = n;
     return this;
@@ -45,7 +45,7 @@ umlClass* umlClass::removeFunction(umlFunction* f)
     functions.remove(f);
     return this;
 }
-string umlClass::getName()
+const string &umlClass::getName()
 {
     return name;
 }

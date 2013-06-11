@@ -6,16 +6,6 @@ Rectangle {
 	property variant myDiagram;
 	width: 500
     height: 360
-    MouseArea {
-        x: 0
-        y: 0
-        anchors.rightMargin: 0
-        anchors.bottomMargin: 0
-        anchors.leftMargin: 0
-        anchors.topMargin: 0
-        anchors.fill: parent
-
-    }
 
 	Rectangle {
 		id: editorPane
@@ -68,22 +58,22 @@ Rectangle {
 		//property variant myDiagram;
 		//property variant myClasses;
 		model:myDiagram.classes;
-		property int maxZ:0;
+		property int maxZ:1;
 		delegate: ClassDiagram
 		{
 
 			myClass:object
 			myFunctions:object.functions
 			myAttributes:object.attributes
-			z:0
+			z:repeater.maxZ
 			mouseArea.onPressed:
 			{
 				repeater.maxZ++;
 				z=repeater.maxZ;
-				if(editorPane.cd1 == undefined)
-					cd1 = this;
-				else if(editorPane.cd2 == undefined)
-					cd2=this;
+//				if(editorPane.cd1 == undefined)
+//					cd1 = this;
+//				else if(editorPane.cd2 == undefined)
+//					cd2=this;
 			}
 			mouseArea.onReleased:
 			{
@@ -93,25 +83,46 @@ Rectangle {
 		}
 	}
 
+
+
 	Repeater
 	{
 		id:connRepeater
 		model:myDiagram.connections
 		delegate:Connection
 		{
-			obj2:getClassDiagram(object.class1)
-			obj1:getClassDiagram(object.class2)
+			obj1:getClassDiagram(object.class1)
+			obj2:getClassDiagram(object.class2)
+			connRep:connRepeater
+			connObject:object
 			function getClassDiagram(c)
 			{
-				for(i=0;i<repeater.count;i++)
+				var myIndex=0;
+				console.log(repeater.count);
+				for(myIndex=0;myIndex<repeater.model.count;myIndex++)
 				{
-					if(repeater.itemAt(i).myClass === c)
-						return repeater.itemAt(i);
+					if(repeater.itemAt(myIndex).myClass.id === c.id)
+						return repeater.itemAt(myIndex);
+					//i++;
 				}
 			}
 
 		}
+}
+
+MouseArea {
+	x: 0
+	y: 0
+	anchors.rightMargin: 0
+	anchors.bottomMargin: 0
+	anchors.leftMargin: 0
+	anchors.topMargin: 0
+	anchors.fill: parent
+	onClicked:
+	{
+		console.log(mouse.x + "," + mouse.y+"\n");
 	}
+}
 	}
 
 
@@ -143,6 +154,7 @@ Rectangle {
 		 y: 0
 		 width: parent.width
 		 height: parent.height
+   rotation: 0
 		 model: VisualItemModel {
 			 Button {
 				 width: editorToolbar.width

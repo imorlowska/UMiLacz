@@ -36,6 +36,7 @@ void QDiagram::commitChanges()
 
 	auto newDependencies = connections.getConnections();
 	myDiagram->getDependencies().clear();
-	myDiagram->getDependencies().insert(newDependencies.begin(),
+	myDiagram->getDependencies().insert(myDiagram->getDependencies().begin(),
+										newDependencies.begin(),
 										newDependencies.end());
 }

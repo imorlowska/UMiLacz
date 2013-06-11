@@ -9,7 +9,7 @@ class QDiagram:public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(QString name READ getName WRITE setName NOTIFY nameChanged)
-	Q_PROPERTY(QVariant classes READ getClasses)
+	Q_PROPERTY(ClassesModel* classes READ getClasses)
 	Q_PROPERTY(ConnectionsModel* connections READ getConnections)
 	//Q_PROPERTY(AttributesModel attributes READ getAttributes)
 private:
@@ -23,7 +23,7 @@ public:
 	QString getName()const;
 	void setName(const QString& n);
 
-	QVariant  getClasses(){return QVariant::fromValue(&classes);}
+	ClassesModel*  getClasses(){return &classes;}
 	ConnectionsModel* getConnections(){return &connections;}
 	umlDiagram* getDiagram(){return myDiagram;}
 

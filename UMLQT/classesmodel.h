@@ -9,10 +9,12 @@ using namespace std;
 
 class ClassesModel:public QObjectListModel
 {
+	Q_OBJECT
 public:
-	ClassesModel(const list<umlClass*>& listOfClasses,QObject *parent=0);
+	ClassesModel(const list<umlClass *> &listOfClasses, QObject *parent=0);
 	Q_INVOKABLE void addEmpty();
 	list<umlClass*> getClasses();
+	virtual ~ClassesModel(){}
 };
 
 #endif // CLASSESMODEL_H

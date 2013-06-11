@@ -15,6 +15,7 @@ class QClass:public QObject
 	Q_PROPERTY(QString name READ getName WRITE setName NOTIFY nameChanged)
 	Q_PROPERTY(FunctionsModel* functions READ getFunctions)
 	Q_PROPERTY(AttributesModel* attributes READ getAttributes)
+	Q_PROPERTY(int id READ getId)
 private:
 	umlClass* myClass;
 	FunctionsModel functions;
@@ -30,7 +31,10 @@ public:
 	umlClass* getClass(){return myClass;}
 
 	void commitChanges();
-
+	int getId()
+	{
+		return (int)this;
+	}
 
 signals:
 	void nameChanged();

@@ -21,21 +21,19 @@ umlDiagram* umlDiagram::setName(string name)
 umlDiagram* umlDiagram::addDependency(umlClass* c1, umlClass* c2, connectionType ct,
                      connectionNumber cn)
 {
-    dependencies.push_back(pair <pair <umlClass*, umlClass*>,
-                              pair<connectionType, connectionNumber> >
-                        (pair<umlClass*,umlClass*>(c1,c2),
-                         pair<connectionType,connectionNumber>(ct,cn)));
+	dependencies.push_back
+			(tuple<umlClass*,umlClass*,connectionType,connectionNumber>(c1,c2,ct,cn));
     return this;
 }
 string umlDiagram::getName()
 {
     return name;
 }
-list<umlClass*> umlDiagram::getClasses()
+list<umlClass *> &umlDiagram::getClasses()
 {
     return classes;
 }
-list <pair<pair<umlClass*,umlClass*>,pair<connectionType,connectionNumber> > >
+list <tuple<umlClass*,umlClass*,connectionType,connectionNumber>>
     umlDiagram::getDependencies()
 {
     return dependencies;

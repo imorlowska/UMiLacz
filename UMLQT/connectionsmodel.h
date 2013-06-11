@@ -4,24 +4,29 @@
 #include "qobjectlistmodel.h"
 #include "classesmodel.h"
 #include "qconnection.h"
-#include <map>
+#include <list>
+#include <tuple>
 using namespace std;
 
-class ConnectionsModel:QObjectListModel
+class ConnectionsModel:public QObjectListModel
 {
+	Q_OBJECT
 public:
-	ConnectionsModel(const map<pair<umlClass*,umlClass*>,
-					 pair<connectionType,connectionNumber>>&
-					 connections,
-					 const ClassesModel& classes,
-					 QObject* parent=0);
-	ConnectionsModel(QObject *parent=0);
+	ConnectionsModel
+		(const list<tuple<umlClass *, umlClass *, connectionType, connectionNumber> > &connections,
+		 const ClassesModel& classes,
+		 QObject *parent=0);
+	//ConnectionsModel(QObject *parent=0);
 
-	map<pair<QClass *, QClass *>, pair<connectionType,connectionNumber>> getConnections();
+	list<tuple<umlClass*,umlClass*,connectionType,connectionNumber>>
+	getConnections();
 
 	Q_INVOKABLE
 	void addConnection(const QVariant& c1, const QVariant& c2, int type, int number);
-private:
+	virtual ~ConnectionsModel(){}
+signals:
+
+public slots:
 
 };
 

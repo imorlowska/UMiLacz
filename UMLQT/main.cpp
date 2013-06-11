@@ -42,11 +42,18 @@ void createModel()
 	c2->setName("crapClass");
 
 
+	umlClass* c3 = new umlClass();
+	c3->setName("scumClass");
+
 
 
 	diagram.addClass(c2);
+	diagram.addClass(c3);
 	diagram.addDependency
 			(c1,c2,connectionType::contains_,connectionNumber::one2one);
+
+	diagram.addDependency
+			(c2,c3,connectionType::extends_,connectionNumber::one2one);
 
 }
 

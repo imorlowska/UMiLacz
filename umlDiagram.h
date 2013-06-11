@@ -2,13 +2,13 @@
 #define UMLDIAGRAM_H
 
 #include "umlClass.h"
-
+#include "tuple"
 class umlDiagram
 {
     private:
         list <umlClass*> classes;
-        list <pair < pair <umlClass*, umlClass*>,
-                     pair<connectionType, connectionNumber> > > dependencies;
+		list <tuple<umlClass*,umlClass*,
+				connectionType,connectionNumber>> dependencies;
         string name;
     public:
         umlDiagram();
@@ -18,9 +18,8 @@ class umlDiagram
         umlDiagram* addDependency(umlClass* c1, umlClass* c2, connectionType ct,
                              connectionNumber cn);
         string getName();
-        list<umlClass*> getClasses();
-        list <pair < pair <umlClass*, umlClass*>,
-                pair<connectionType, connectionNumber> > > getDependencies();
+		list<umlClass *> &getClasses();
+		list <tuple<umlClass*,umlClass*,connectionType,connectionNumber>> getDependencies();
         string getString();
 };
 
