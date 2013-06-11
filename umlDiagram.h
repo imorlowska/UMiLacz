@@ -7,8 +7,8 @@ class umlDiagram
 {
     private:
         list <umlClass*> classes;
-        map < pair <umlClass*, umlClass*>,
-              pair<connectionType, connectionNumber> > dependencies;
+        list <pair < pair <umlClass*, umlClass*>,
+                     pair<connectionType, connectionNumber> > > dependencies;
         string name;
     public:
         umlDiagram();
@@ -19,8 +19,8 @@ class umlDiagram
                              connectionNumber cn);
         string getName();
         list<umlClass*> getClasses();
-        map<pair<umlClass*, umlClass*>,pair<connectionType, connectionNumber> >
-            getDependencies();
+        list <pair < pair <umlClass*, umlClass*>,
+                pair<connectionType, connectionNumber> > > getDependencies();
         string getString();
 };
 

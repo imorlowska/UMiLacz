@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="converter.h" />
+		<Unit filename="converter2cpp.h" />
 		<Unit filename="facade.cpp" />
 		<Unit filename="facade.h" />
 		<Unit filename="includes.h" />
