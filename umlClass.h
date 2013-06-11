@@ -14,7 +14,7 @@ class umlClass
         list<umlAttribute*> attributes;
     public:
         umlClass();
-        umlClass* setName(string n);
+		umlClass* setName(const string& n);
         umlClass* setAccessability(accessability a);
         umlClass* addSpecialType(specialType s);
         void removeSpecialType(specialType s);
@@ -22,7 +22,7 @@ class umlClass
         umlClass* addFunction(umlFunction* f);
         umlClass* removeAttribute(umlAttribute* a);
         umlClass* removeFunction(umlFunction* f);
-        string getName();
+		const string& getName();
         accessability getAccessability();
         list<specialType>& getSpecialType();
         list<umlAttribute*>& getAttributes();
