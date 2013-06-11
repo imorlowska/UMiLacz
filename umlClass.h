@@ -14,14 +14,17 @@ class umlClass
         list<umlAttribute*> attributes;
     public:
         umlClass();
+        
 		umlClass* setName(const string& n);
         umlClass* setAccessability(accessability a);
+
         umlClass* addSpecialType(specialType s);
-        void removeSpecialType(specialType s);
         umlClass* addAttribute(umlAttribute* a);
         umlClass* addFunction(umlFunction* f);
+
         umlClass* removeAttribute(umlAttribute* a);
         umlClass* removeFunction(umlFunction* f);
+
 		const string& getName();
         accessability getAccessability();
         list<specialType>& getSpecialType();

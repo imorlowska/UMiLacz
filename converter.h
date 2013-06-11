@@ -8,12 +8,8 @@ class converter
 {
     protected:
         umlDiagram* diagram;
-        static converter* instance;
-
-        converter();
     public:
-        static converter* getInstance();
-        virtual void convert(umlDiagram* diagram) const = 0;
+        virtual void convert(umlDiagram* diagram) = 0;
 };
 
 #endif
