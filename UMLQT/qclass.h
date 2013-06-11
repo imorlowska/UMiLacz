@@ -29,6 +29,8 @@ public:
 
 	umlClass* getClass(){return myClass;}
 
+	void commitChanges();
+
 
 signals:
 	void nameChanged();

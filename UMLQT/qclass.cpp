@@ -20,3 +20,17 @@ void QClass::setName(const QString& n)
 	myClass->setName(n.toStdString());
 	emit nameChanged();
 }
+
+void QClass::commitChanges()
+{
+	myClass->getAttributes().clear();
+	auto newAttributes = attributes.getAttributes();
+	myClass->getAttributes().insert(myClass->getAttributes().begin(),newAttributes.begin(),newAttributes.end());
+
+
+	myClass->getFunctions().clear();
+	auto newFunctions = functions.getFunctions();
+	myClass->getFunctions().insert(myClass->getFunctions().begin(),newFunctions.begin(),newFunctions.end());
+
+
+}

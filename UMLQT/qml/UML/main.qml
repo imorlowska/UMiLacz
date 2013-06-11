@@ -33,20 +33,21 @@ Rectangle {
 		width:103
 		height:19
 		color:"#C9FFDD"
-		border.color: black
+		border.color: "black"
 		border.width: 3
 		TextInput
 		{
+			id:txt
 			anchors.fill:parent
 			anchors.topMargin: 3
 			anchors.leftMargin:  3
 			anchors.bottomMargin:  3
 			anchors.rightMargin: 3
-			text : myDiagram.name
+			//text : myDiagram.name
 	  horizontalAlignment: TextInput.AlignLeft
 			Binding
 			{
-				target:diagramName
+				target:txt
 				property: "text"
 				value:myDiagram.name
 
@@ -54,7 +55,7 @@ Rectangle {
 			}
 			Connections
 			{
-				target:diagramName
+				target:txt
 				onTextChanged:{myDiagram.name=diagramName.text}
 			}
 		}
@@ -67,6 +68,7 @@ Rectangle {
 		//property variant myDiagram;
 		//property variant myClasses;
 		model:myDiagram.classes;
+		property int maxZ:0;
 		delegate: ClassDiagram
 		{
 
@@ -76,16 +78,46 @@ Rectangle {
 			z:0
 			mouseArea.onPressed:
 			{
-				z=1;
+				repeater.maxZ++;
+				z=repeater.maxZ;
+				if(editorPane.cd1 == undefined)
+					cd1 = this;
+				else if(editorPane.cd2 == undefined)
+					cd2=this;
 			}
 			mouseArea.onReleased:
 			{
-				z=0;
+				//z=0;
+			}
+
+		}
+	}
+
+	Repeater
+	{
+		id:connRepeater
+		model:myDiagram.connections
+		delegate:Connection
+		{
+			obj2:getClassDiagram(object.class1)
+			obj1:getClassDiagram(object.class2)
+			function getClassDiagram(c)
+			{
+				for(i=0;i<repeater.count;i++)
+				{
+					if(repeater.itemAt(i).myClass === c)
+						return repeater.itemAt(i);
+				}
 			}
 
 		}
 	}
 	}
+
+
+
+
+
 
  Rectangle {
 	 id: rectangle1
@@ -126,7 +158,24 @@ Rectangle {
 //							}
 					 myDiagram.addEmptyClass();
 
+
 						}
+			 }
+				 Button {
+					 width: editorToolbar.width
+					 name: "Connect"
+					 mousearea.onClicked: {
+								//editorPane.children.
+								//var component = Qt.createComponent("ClassDiagram.qml");
+	//							if(component.status === Component.Ready)
+	//							{
+	//								var cd = component.createObject(repeater);
+	//								cd.x=50;
+	//								cd.y=50;
+	//							}
+						 myDiagram.addEmptyClass();
+
+							}
 			 }
 		 }
 	 }

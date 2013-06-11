@@ -23,17 +23,30 @@ void createModel()
 //  model->appendRow(new FruitItem("Grape"));
 //  return model;
 
-	umlClass* cl = new umlClass();
-	cl->setName("shitClass");
+	umlClass* c1 = new umlClass();
+	c1->setName("shitClass");
 
 
-	cl->addFunction((new umlFunction())->setName("func")->setType(((new umlSimpleType())->setType(int_))));
-	cl->addFunction((new umlFunction())->setName("func2"));
-	cl->addFunction((new umlFunction())->setName("func3"));
+	c1->addFunction((new umlFunction())->setName("func")->
+					setType(((new umlSimpleType())->setType(int_))));
+	c1->addFunction((new umlFunction())->setName("func2"));
+	c1->addFunction((new umlFunction())->setName("func3"));
 
-	cl->addAttribute((new umlAttribute())->setName("state1")->setType(((new umlSimpleType())->setType(int_))));
+	c1->addAttribute(
+				(new umlAttribute())->
+				setName("state1")->
+				setType(((new umlSimpleType())->setType(int_))));
 
-	diagram.addClass(cl);
+	diagram.addClass(c1);
+	umlClass* c2 = new umlClass();
+	c2->setName("crapClass");
+
+
+
+
+	diagram.addClass(c2);
+	diagram.addDependency
+			(c1,c2,connectionType::contains_,connectionNumber::one2one);
 
 }
 
@@ -74,7 +87,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 //	QDeclarativeProperty::write(cd,"myAttributes",QVariant::fromValue(&d.getAttributes()));
 //	QDeclarativeProperty::write(cd,"myFunctions",QVariant::fromValue(&d.getFunctions()));
 
-	bool b = object->setProperty("myDiagram",QVariant::fromValue(&d));
+	object->setProperty("myDiagram",QVariant::fromValue(&d));
 	//cd->setProperty("model",d.getClasses());
 	//cd->setProperty("myAttributes",QVariant::fromValue(&d.getAttributes()));
 	//cd->setProperty("myFunctions",QVariant::fromValue(&d.getFunctions()));
@@ -88,5 +101,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 //	context.setContextProperty("myAttributes",&d.getAttributes());
 //	context.setContextProperty("myFunctions",&d.getFunctions());
 
-    return app->exec();
+	return app->exec();
+
 }

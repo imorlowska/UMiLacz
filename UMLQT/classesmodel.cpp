@@ -12,7 +12,7 @@ void ClassesModel::addEmpty()
 	append(new QClass((new umlClass())->setName("bar")));
 }
 
-list<umlClass *> ClassesModel::getFunctions()
+list<umlClass *> ClassesModel::getClasses()
 {
 	list<umlClass *> classes;
 	for(auto it=m_objects->begin();it!=m_objects->end();it++)

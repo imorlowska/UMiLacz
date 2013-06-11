@@ -12,7 +12,7 @@ class ClassesModel:public QObjectListModel
 public:
 	ClassesModel(const list<umlClass*>& listOfClasses,QObject *parent=0);
 	Q_INVOKABLE void addEmpty();
-	list<umlClass*> getFunctions();
+	list<umlClass*> getClasses();
 };
 
 #endif // CLASSESMODEL_H

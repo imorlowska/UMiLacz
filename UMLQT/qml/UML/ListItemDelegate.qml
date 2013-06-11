@@ -26,7 +26,7 @@ Item
 
                             id:fieldName
                             anchors.fill: parent
-							text:itemText
+							//text:itemText
 							Binding
 							{
 								target:fieldName
