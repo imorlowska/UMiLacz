@@ -4,7 +4,7 @@
 //@Autors: Alexander Myronov & Izabela Orlowska
 //
 
-public class MyClass extends MyClass2 {
+private class MyClass2 {
 	//attributes
 	private myType* attributeNb;
 	protected string name;

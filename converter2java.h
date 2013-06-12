@@ -9,6 +9,7 @@ class converter2java: private converter
     private:
         void generateHeaderFile(umlClass* currentClass);
 
+        void fillDependencyMessage(ofstream& file, umlClass* currentClass);
         void fillAutomatedMessage(ofstream& file);
         void fillPrivateAttributes(ofstream& file, umlClass* currentClass);
         void fillPrivateFunctions(ofstream& file, umlClass* currentClass);

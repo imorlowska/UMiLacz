@@ -24,13 +24,14 @@ void converter2cpp::generateHeaderFile(umlClass* currentClass)
 
     fillAutomatedMessage(headerFile);
 
+    fillDepencencyInclude(headerFile, currentClass);
+
     headerFile << "\n";
-    headerFile << getStringT(currentClass->getAccessability());
-    for(specialType type:currentClass->getSpecialType())
-    {
-        headerFile << getStringT(type);
-    }
-    headerFile << currentClass->getName() + "\n{\n";
+    headerFile << "class " << currentClass->getName();
+
+    fillDependencyMessage(headerFile, currentClass);
+
+    headerFile << "\n{\n";
 
     headerFile << "\tprivate:\n";
     fillPrivateAttributes(headerFile, currentClass);
@@ -55,6 +56,47 @@ void converter2cpp::fillAutomatedMessage(ofstream& file)
     file << "//\n";
     file << "//@Autors: Alexander Myronov & Izabela Orlowska\n";
     file << "//\n";
+}
+
+void converter2cpp::fillDepencencyInclude(ofstream& file, umlClass* currentClass)
+{
+    list<string> toInclude;
+    for(tuple<umlClass *, umlClass *, connectionType, connectionNumber>
+                    line:diagram->getDependencies())
+    {
+        if (get<0>(line) == currentClass && get<2>(line) == extends_)
+        {
+            toInclude.push_back(get<1>(line)->getName());
+        }
+    }
+    if (toInclude.size() > 0)
+    {
+        for(string name:toInclude)
+        {
+            file << "#include <" + name + ".h>\n";
+        }
+    }
+}
+
+void converter2cpp::fillDependencyMessage(ofstream& file, umlClass* currentClass)
+{
+    list<string> toInclude;
+    for(tuple<umlClass *, umlClass *, connectionType, connectionNumber>
+                    line:diagram->getDependencies())
+    {
+        if (get<0>(line) == currentClass && get<2>(line) == extends_)
+        {
+            toInclude.push_back(get<1>(line)->getName());
+        }
+    }
+    if (toInclude.size() > 0)
+    {
+        file << ":";
+        for(string name:toInclude)
+        {
+            file << " public " + name;
+        }
+    }
 }
 
 void converter2cpp::fillPrivateAttributes(ofstream& file, umlClass* currentClass)

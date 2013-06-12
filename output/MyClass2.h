@@ -3,9 +3,8 @@
 //
 //@Autors: Alexander Myronov & Izabela Orlowska
 //
-#include <MyClass2.h>
 
-class MyClass: public MyClass2
+class MyClass2
 {
 	private:
 		myType* attributeNb;

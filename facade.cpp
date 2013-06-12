@@ -45,18 +45,17 @@ umlDiagram* Facade::sampleDiagram()
     c->setName(name)->setAccessability(public_)->addFunction(f)->
             addFunction(f2)->addAttribute(p3)->addAttribute(p4);
 
-
-    //cout << c->getString() << endl;
+    umlClass* c2 = new umlClass();
+    string name2 = "MyClass2";
+    c2->setName(name2)->setAccessability(private_)->addFunction(f)->
+            addFunction(f2)->addAttribute(p3)->addAttribute(p4);
 
     umlDiagram* d = new umlDiagram();
 
-    d->addClass(c)->setName("Przykladowy");
-
-    //cout << d->getString() << endl;
+    d->addClass(c)->addClass(c2)->addDependency(c,c2,extends_,one2one)->
+            setName("Przykladowy");
 
     return d;
-    //converter2cpp* cpp = new converter2cpp();
-    //cpp->convert(d);
 }
 
 void Facade::generateCpp(umlDiagram* diagram)

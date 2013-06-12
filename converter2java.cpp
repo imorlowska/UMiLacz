@@ -25,7 +25,10 @@ void converter2java::generateHeaderFile(umlClass* currentClass)
     {
         headerFile << getStringT(type);
     }
-    headerFile << currentClass->getName() + " {\n";
+    headerFile << "class " + currentClass->getName();
+
+    fillDependencyMessage(headerFile, currentClass);
+    headerFile << " {\n";
 
     headerFile << "\t//attributes\n";
     fillPrivateAttributes(headerFile, currentClass);
@@ -48,6 +51,27 @@ void converter2java::fillAutomatedMessage(ofstream& file)
     file << "//\n";
     file << "//@Autors: Alexander Myronov & Izabela Orlowska\n";
     file << "//\n";
+}
+
+void converter2java::fillDependencyMessage(ofstream& file, umlClass* currentClass)
+{
+    list<string> toInclude;
+    for(tuple<umlClass *, umlClass *, connectionType, connectionNumber>
+                    line:diagram->getDependencies())
+    {
+        if (get<0>(line) == currentClass && get<2>(line) == extends_)
+        {
+            toInclude.push_back(get<1>(line)->getName());
+        }
+    }
+    if (toInclude.size() > 0)
+    {
+        file << " extends";
+        for(string name:toInclude)
+        {
+            file << " " + name;
+        }
+    }
 }
 
 void converter2java::fillPrivateAttributes(ofstream& file, umlClass* currentClass)
