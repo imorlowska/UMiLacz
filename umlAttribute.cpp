@@ -4,6 +4,7 @@
 umlAttribute::umlAttribute():type(nullptr)
 {
     name = "foo";
+	type = umlType::getByString("int");
     accessability_ = none_;
 }
 umlAttribute* umlAttribute::setName(string n)
@@ -58,5 +59,7 @@ string umlAttribute::getString()
     }
 	string typeStr = type==nullptr?"":type->getString();
 	return getStringT(accessability_) + tmp+ "" + typeStr + " "
-                    + name;
+			+ name;
 }
+
+

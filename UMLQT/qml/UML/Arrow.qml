@@ -45,6 +45,8 @@ Rectangle
 				target: arrow
 				opacity:0
 				visible:false
+				width:20
+				height:20
 			}
 			StateChangeScript
 			{

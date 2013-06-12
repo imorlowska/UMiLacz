@@ -22,7 +22,10 @@ public:
 	getConnections();
 
 	Q_INVOKABLE
-	void addConnection(const QVariant& c1, const QVariant& c2, int type, int number);
+	QString addConnection(const QVariant& c1, const QVariant& c2, int type, int number);
+
+	Q_INVOKABLE
+	void deleteConnection(const QVariant& conn);
 	virtual ~ConnectionsModel(){}
 signals:
 

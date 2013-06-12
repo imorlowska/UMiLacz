@@ -24,7 +24,7 @@ class umlFunction
         accessability getAccessability();
         umlType* getType();
         list<specialType> getSpecialType();
-        list<umlAttribute*> getParams();
+		list<umlAttribute*>& getParams();
         string getString();
 };
 

@@ -12,6 +12,8 @@ Item
 	Connector
 	{
 		id:connector
+		model:connRep.model
+		object:connObject
 		hThenV: getOrientation()
 		threeSegs: true
 		color:"black"
@@ -65,44 +67,7 @@ Item
 
 		}
 
-		Text
-		{
-			id:text1
-			text:getText1()
-			x:getX()
-			y:getY()
-			MouseArea
-			{
-				anchors.fill: parent
-				onClicked:
-				{
-					var number = connObject.number;
 
-					connObject.number = (number+3)%9;
-
-				}
-			}
-			function getX()
-			{
-				if(connector.hThenV)
-				{
-					if(connector.x1<connector.x2)
-						return arrow1.x+arrow1.width;
-					return arrow1.x-arrow1.width;
-				}
-				return arrow1.x+arrow1.width;
-			}
-			function getY()
-			{
-				if(!connector.hThenV)
-				{
-					if(connector.y1<connector.y2)
-						return arrow1.y+arrow1.height;
-					return arrow1.y-arrow1.height;
-				}
-				return arrow1.y-arrow1.height;
-			}
-		}
 
 	}
 
@@ -148,24 +113,120 @@ Item
 			return 90;
 
 		}
+
+
+	}
+
+	Rectangle
+	{
+		visible:connObject.type===2||connObject.type===3
+		x:getText2X()
+		y:getText2Y()
+		width:20
+		height:15
+
+		border.color: "grey"
+		border.width: 1
 		Text
 		{
 			id:text2
 			text:getText2()
-			MouseArea
-			{
-				anchors.fill: parent
-				onClicked:
-				{
-					var number = connObject.number;
-					var row = number/3;
-					connObject.number = row + (number+1)%3;
 
-				}
+			anchors.fill:parent
+
+
+		}
+		MouseArea
+		{
+
+			x:parent.x
+			y:parent.y
+			anchors.fill: parent
+			onPressed:
+			{
+				var number = connObject.number;
+				var row = Math.floor(number/3);
+				connObject.number = row + (number+1)%3;
+
 			}
+		}
+		function getText2X()
+		{
+			if(connector.hThenV)
+			{
+				if(connector.x1<connector.x2)
+					return arrow2.x-arrow2.width;
+				return arrow2.x + arrow2.width;
+			}
+			return arrow2.x+arrow2.width;
+		}
+		function getText2Y()
+		{
+			if(!connector.hThenV)
+			{
+				if(connector.y1<connector.y2)
+					return arrow2.y-arrow2.height;
+				return arrow2.y+arrow2.height;
+			}
+			return arrow2.y-arrow2.height;
+		}
+	}
+
+	Rectangle
+	{
+		visible:connObject.type===2||connObject.type===3
+		x:getText1X()
+		y:getText1Y()
+		width:20
+		height:15
+		border.color: "grey"
+		border.width: 1
+		Text
+		{
+			id:text1
+			text:getText1()
+			anchors.fill: parent
+
+
+		}
+		MouseArea
+		{
+			x:parent.x
+			y:parent.y
+			anchors.fill: parent
+			onPressed:
+			{
+				var number = connObject.number;
+
+				connObject.number = (number+3)%9;
+
+			}
+		}
+		function getText1X()
+		{
+			if(connector.hThenV)
+			{
+				if(connector.x1<connector.x2)
+					return arrow1.x+arrow1.width;
+				return arrow1.x-arrow1.width;
+			}
+			return arrow1.x+arrow1.width;
+		}
+		function getText1Y()
+		{
+			if(!connector.hThenV)
+			{
+				if(connector.y1<connector.y2)
+					return arrow1.y+arrow1.height;
+				return arrow1.y-arrow1.height;
+			}
+			return arrow1.y-arrow1.height;
 		}
 
 	}
+
+
+
 
 	function getState1()
 	{
@@ -191,7 +252,7 @@ Item
 
 	function getText1()
 	{
-		var col = connObject.number/3;
+		var col = Math.floor(connObject.number/3);
 		switch(col)
 		{
 		case 0:
@@ -203,7 +264,7 @@ Item
 		}
 	}
 
-	function getText1()
+	function getText2()
 	{
 		var col = connObject.number%3;
 		switch(col)
@@ -334,7 +395,7 @@ Item
 				if(c.obj2.x + c.obj2.width<=c.obj1.x)
 				{
 					q++;
-					if(c.obj2.y < obj2.y)
+					if(c.obj2.y < obj2.y || (c.obj2.y === obj2.y && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}
@@ -343,7 +404,7 @@ Item
 				if(c.obj1.x + c.obj1.width<=c.obj2.x)
 				{
 					q++;
-					if(c.obj1.y< obj2.y)
+					if(c.obj1.y< obj2.y || (c.obj1.y === obj2.y && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}
@@ -372,7 +433,7 @@ Item
 				if(c.obj2.x + c.obj2.width>=c.obj1.x)
 				{
 					q++;
-					if(c.obj2.myClass.id < obj2.myClass.id)
+					if(c.obj2.y < obj2.y|| (c.obj2.y === obj2.y && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}
@@ -381,7 +442,7 @@ Item
 				if(c.obj1.x + c.obj1.width>=c.obj2.x)
 				{
 					q++;
-					if(c.obj1.y < obj2.y)
+					if(c.obj1.y < obj2.y|| (c.obj1.y === obj2.y && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}
@@ -406,7 +467,7 @@ Item
 						c.obj2.x < c.obj1.x+c.obj1.width)
 				{
 					q++;
-					if(c.obj2.x < obj2.x)
+					if(c.obj2.x < obj2.x || (c.obj2.x === obj2.x && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}
@@ -417,7 +478,7 @@ Item
 						c.obj1.x < c.obj2.x+c.obj2.width)
 				{
 					q++;
-					if(c.obj1.x< obj2.x)
+					if(c.obj1.x< obj2.x || (c.obj1.x === obj2.x && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}
@@ -446,7 +507,7 @@ Item
 						c.obj2.x < c.obj1.x+c.obj1.width)
 				{
 					q++;
-					if(c.obj2.x < obj2.x)
+					if(c.obj2.x < obj2.x|| (c.obj2.x === obj2.x && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}
@@ -457,7 +518,7 @@ Item
 						c.obj1.x < c.obj2.x+c.obj2.width)
 				{
 					q++;
-					if(c.obj1.x< obj2.x)
+					if(c.obj1.x< obj2.x||(c.obj1.x === obj2.x && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}
@@ -489,7 +550,7 @@ Item
 				if(c.obj2.x + c.obj2.width<=c.obj1.x)
 				{
 					q++;
-					if(c.obj2.y < obj1.y)
+					if(c.obj2.y < obj1.y || (c.obj2.y === obj1.y && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}
@@ -498,7 +559,7 @@ Item
 				if(c.obj1.x + c.obj1.width<=c.obj2.x)
 				{
 					q++;
-					if(c.obj1.y < obj1.y)
+					if(c.obj1.y < obj1.y || (c.obj1.y === obj1.y && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}
@@ -525,7 +586,7 @@ Item
 				if(c.obj2.x + c.obj2.width>=c.obj1.x)
 				{
 					q++;
-					if(c.obj2.y < obj1.y)
+					if(c.obj2.y < obj1.y|| (c.obj2.y === obj1.y && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}
@@ -534,7 +595,7 @@ Item
 				if(c.obj1.x + c.obj1.width>=c.obj2.x)
 				{
 					q++;
-					if(c.obj1.y < obj1.y)
+					if(c.obj1.y < obj1.y|| (c.obj1.y === obj1.y && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}
@@ -559,7 +620,7 @@ Item
 						c.obj1.x < c.obj2.x+c.obj2.width)
 				{
 					q++;
-					if(c.obj2.x < obj1.x)
+					if(c.obj2.x < obj1.x|| (c.obj2.x === obj1.x && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}
@@ -570,7 +631,7 @@ Item
 						c.obj2.x < c.obj1.x+c.obj1.width)
 				{
 					q++;
-					if(c.obj1.x < obj1.x)
+					if(c.obj1.x < obj1.x|| (c.obj1.x === obj1.x && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}
@@ -599,7 +660,7 @@ Item
 						c.obj1.x < c.obj2.x+c.obj2.width)
 				{
 					q++;
-					if(c.obj2.x < obj1.x)
+					if(c.obj2.x < obj1.x|| (c.obj2.x === obj1.x && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}
@@ -610,7 +671,7 @@ Item
 						c.obj2.x < c.obj1.x+c.obj1.width)
 				{
 					q++;
-					if(c.obj1.x < obj1.x)
+					if(c.obj1.x < obj1.x|| (c.obj1.x === obj1.x && c.connObject.id<connObject.id))
 						pt++;
 				}
 			}

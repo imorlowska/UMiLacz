@@ -19,7 +19,7 @@ class umlDiagram
                              connectionNumber cn);
         string getName();
 		list<umlClass *> &getClasses();
-		list <tuple<umlClass*,umlClass*,connectionType,connectionNumber>> getDependencies();
+		list <tuple<umlClass*,umlClass*,connectionType,connectionNumber>>& getDependencies();
         string getString();
 };
 

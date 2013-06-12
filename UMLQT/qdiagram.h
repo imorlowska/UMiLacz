@@ -35,6 +35,9 @@ public:
 		classes.addEmpty();
 	}
 
+	Q_INVOKABLE
+	void UMiL();
+
 signals:
 	void nameChanged();
 

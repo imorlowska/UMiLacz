@@ -24,6 +24,7 @@ class umlAttribute
         umlType* getType();
         list<specialType> getSpecialType();
         string getString();
+
 };
 
 #endif

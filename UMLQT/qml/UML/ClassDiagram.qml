@@ -34,6 +34,10 @@ Rectangle
         anchors.fill: parent
         drag.target: mainRectangle
         drag.axis: Drag.XandYAxis
+		onPressed:
+		{
+			mainRectangle.focus=true;
+		}
 
     }
     Column

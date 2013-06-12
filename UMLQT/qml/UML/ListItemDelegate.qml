@@ -15,7 +15,13 @@ Item
                     id:bigger
                     width:parent.width*0.8
                     height: parent.height
-                    color:"#CEFFE7"
+					color:getColor()
+
+					function getColor()
+					{
+						if(object.correct) return"#CEFFE7";
+						return "#FFA3AF";
+					}
 
 
 
@@ -26,15 +32,15 @@ Item
 
                             id:fieldName
                             anchors.fill: parent
-							//text:itemText
-							Binding
-							{
-								target:fieldName
-								property: "text"
-								value:object.name
+							text:object.name
+//							Binding
+//							{
+//								target:fieldName
+//								property: "text"
+//								value:object.name
 
 
-							}
+//							}
 							Connections
 							{
 								target:fieldName
@@ -48,6 +54,8 @@ Item
                                 font.italic = fieldName.focus
                                 maOverField.enabled = ! fieldName.focus
                                 rectDelete.show = focus
+								if(!fieldName.focus)
+									object.commit();
                             }
 
                             Keys.onDeletePressed:rectDelete.deleteCurrent()

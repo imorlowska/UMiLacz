@@ -57,7 +57,7 @@ list<specialType> umlFunction::getSpecialType()
 {
     return sType;
 }
-list<umlAttribute*> umlFunction::getParams()
+list<umlAttribute *> &umlFunction::getParams()
 {
     return params;
 }

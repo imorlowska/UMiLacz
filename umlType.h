@@ -8,6 +8,7 @@ class umlType
     public:
         typeKinds typeKind;
         virtual string getString() = 0;
+		static umlType* getByString(const string& typeStr);
 };
 
 class umlInternalType:public umlType
@@ -18,6 +19,7 @@ class umlInternalType:public umlType
         umlInternalType();
         umlInternalType* setType(string s);
         string getString();
+
 };
 
 class umlSimpleType:public umlType

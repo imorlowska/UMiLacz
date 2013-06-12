@@ -1,5 +1,6 @@
 #include "qdiagram.h"
-
+#include <tuple>
+using namespace std;
 
 
 QDiagram::QDiagram(umlDiagram *Diagram, QObject *parent):
@@ -34,9 +35,30 @@ void QDiagram::commitChanges()
 			insert(myDiagram->getClasses().begin(),
 				   newClasses.begin(),newClasses.end());
 
-	auto newDependencies = connections.getConnections();
+	list<tuple<umlClass*,umlClass*,connectionType,connectionNumber>>
+			newDependencies = connections.getConnections();
 	myDiagram->getDependencies().clear();
-	myDiagram->getDependencies().insert(myDiagram->getDependencies().begin(),
-										newDependencies.begin(),
-										newDependencies.end());
+	for(auto it=newDependencies.begin();it!=newDependencies.end();it++)
+	{
+		umlClass* c1 = get<0>(*it),*c2 = get<1>(*it);
+		connectionType ct = get<2>(*it);
+		connectionNumber cn = get<3>(*it);
+		myDiagram->getDependencies().
+				push_back(
+					tuple<umlClass*,umlClass*,connectionType,connectionNumber>(
+						get<0>(*it),
+						get<1>(*it),
+						get<2>(*it),
+						get<3>(*it)
+						));
+	}
+//	myDiagram->getDependencies().insert(myDiagram->getDependencies().begin(),
+//										newDependencies.begin(),
+//										newDependencies.end());
+}
+
+void QDiagram::UMiL()
+{
+	commitChanges();
+	//TODO: tutaj mozna wywołac jakas metode do konwertacji
 }

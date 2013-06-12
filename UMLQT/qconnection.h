@@ -27,6 +27,11 @@ public:
 	void setClass2(const QVariant& c2);
 
 	int getId(){return (int)this;}
+
+	connectionType getTypeOrig(){return type;}
+	connectionNumber getNumberOrig(){return number;}
+	QClass* getQClass1(){return class1;}
+	QClass* getQClass2(){return class2;}
 signals:
 	void typeChanged();
 	void numberChanged();

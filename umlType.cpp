@@ -11,7 +11,7 @@ umlInternalType* umlInternalType::setType(string s)
 }
 string umlInternalType::getString()
 {
-    return name;
+	return name;
 }
 
 
@@ -74,4 +74,34 @@ string umlBinaryType::getString()
 {
     return getStringT(name) + "< " + insideFirst->getString()
                             + ", " + insideSecond->getString() + " >";
+}
+
+
+umlType *umlType::getByString(const string &type)
+{
+	if(type == "int" )
+	{
+		return (new umlSimpleType())->setType(simpleType::int_);
+	}
+	else if(type == "double")
+	{
+		return (new umlSimpleType())->setType(simpleType::double_);
+	}
+	else if( type == "bool")
+	{
+		return (new umlSimpleType())->setType(simpleType::bool_);
+	}
+	else if(type == "float")
+	{
+		return (new umlSimpleType())->setType(simpleType::float_);
+	}
+	else if(type == "string")
+	{
+		return (new umlSimpleType())->setType(simpleType::string_);
+	}
+	else
+	{
+		return (new umlInternalType())->setType(type);
+	}
+
 }

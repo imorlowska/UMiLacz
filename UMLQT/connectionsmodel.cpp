@@ -43,16 +43,65 @@ ConnectionsModel::ConnectionsModel
 
 list<tuple<umlClass *, umlClass *, connectionType, connectionNumber> > ConnectionsModel::getConnections()
 {
-	return list<tuple<umlClass*,umlClass*,connectionType,connectionNumber>>();
+	list<tuple<umlClass*,umlClass*,connectionType,connectionNumber>> result;
+	for(auto it = m_objects->begin();it!=m_objects->end();it++)
+	{
+		QConnection* conn = (QConnection*)*it;
+		umlClass* c1 = conn->getQClass1()->getClass(),
+				*c2 = conn->getQClass2()->getClass();
+		connectionType ct = conn->getTypeOrig();
+		connectionNumber cn = conn->getNumberOrig();
+		result.push_back
+				(tuple<umlClass*,umlClass*,connectionType,connectionNumber>
+						 (c1,
+						  c2,
+						  ct,
+						  cn));
+	}
 }
 
-void ConnectionsModel::addConnection(const QVariant &c1, const QVariant &c2,int type,int number)
+QString ConnectionsModel::addConnection(const QVariant &c1, const QVariant &c2,int type,int number)
 {
-	m_objects->append(
-				new QConnection(c1.value<QClass*>(),
-								c2.value<QClass*>(),
-								(connectionType)type,
-								(connectionNumber)number));
+	QClass * class1 = c1.value<QClass*>(),*class2 = c2.value<QClass*>();
+	if(type == connectionType::extends_ || type == connectionType::implements_)
+	{
+		for(auto it = m_objects->begin();it!=m_objects->end();it++)
+		{
+			QConnection* existing = (QConnection*)*it;
+			if((existing->getClass1() == c1 && existing->getClass2() == c2)||
+					(existing->getClass1() == c2 && existing->getClass2()==c1))
+				return "Inheritance already defined for given classes!";
+		}
+	}
+
+	if(type == connectionType::contains_)
+	{
+		for(auto it = m_objects->begin();it!=m_objects->end();it++)
+		{
+			QConnection* existing = (QConnection*)*it;
+			if((existing->getClass1() == c1 && existing->getClass2() == c2)||
+					(existing->getClass1() == c2 && existing->getClass2()==c1))
+				return "Composition is already defined!\n Use 0..* to 0..* if you want many to many relations";
+		}
+	}
+	append(new QConnection(class1,
+						   class2,
+						(connectionType)type,
+						(connectionNumber)number));
+	return QString("");
+}
+
+void ConnectionsModel::deleteConnection(const QVariant &conn)
+{
+	QConnection* connection = conn.value<QConnection*>();
+	for(int i=0;i<count();i++)
+	{
+		if(at(i) == connection)
+		{
+			remove(i);
+			return;
+		}
+	}
 }
 
 

@@ -24,6 +24,7 @@ class umlClass
 
         umlClass* removeAttribute(umlAttribute* a);
         umlClass* removeFunction(umlFunction* f);
+		void removeSpecialType(specialType s);
 
 		const string& getName();
         accessability getAccessability();

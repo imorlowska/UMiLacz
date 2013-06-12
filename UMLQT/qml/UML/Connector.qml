@@ -3,22 +3,49 @@ import QtQuick 1.1
 Item
 {
 	id:connection
+	property variant model;
+	property variant object;
 	property bool hThenV
 	property bool threeSegs
 	property int x1
 	property int y1
 	property int x2
 	property int y2
+	property int realThickness:hover?thickness+3:thickness
 	property int thickness
 	property color color
+	property bool hover:maHor.containsMouse || maVert.containsMouse || maThird.containsMouse
+
+
+	Keys.onDeletePressed:
+	{
+		model.deleteConnection(object);
+	}
+
 	Rectangle
 	{
 		id:horizintal
 		x:getX()
 		y:getY()
 		width: getW()
-		height: connection.thickness
+		height: connection.realThickness
 		color:"red"
+		border.width:connection.activeFocus?2:0
+		border.color:"grey"
+
+
+
+		MouseArea
+		{
+			id:maHor
+			hoverEnabled: true
+			anchors.fill: parent
+			onPressed:
+			{
+				connection.focus=true;
+			}
+		}
+
 		function getX()
 		{
 			if(threeSegs)
@@ -53,12 +80,26 @@ Item
 	}
 	Rectangle
 	{
+
 		id:vertical
 		x:getX()
 		y:getY()
-		width: connection.thickness
+		width: connection.realThickness
 		height: getH()
 		color:"green"
+		border.width:connection.activeFocus?2:0
+		border.color:"grey"
+		MouseArea
+		{
+			id:maVert
+			hoverEnabled: true
+			anchors.fill: parent
+			onPressed:
+			{
+				connection.focus=true;
+			}
+		}
+
 		function getY()
 		{
 			if(hThenV)
@@ -99,6 +140,19 @@ Item
 		width: getW()
 		height: getH()
 		color:"blue"
+		border.width:connection.activeFocus?2:0
+		border.color:"grey"
+		MouseArea
+		{
+			id:maThird
+			hoverEnabled: true
+			anchors.fill: parent
+			onPressed:
+			{
+				connection.focus=true;
+			}
+		}
+
 		function getX()
 		{
 			if(hThenV)
@@ -122,14 +176,14 @@ Item
 		function getH()
 		{
 			if(hThenV)
-				return connection.thickness;
+				return connection.realThickness;
 			return vertical.height;
 		}
 
 		function getW()
 		{
 			if(!hThenV)
-				return connection.thickness;
+				return connection.realThickness;
 			return horizintal.width;
 		}
 

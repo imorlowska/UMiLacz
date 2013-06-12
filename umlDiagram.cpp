@@ -33,8 +33,7 @@ list<umlClass *> &umlDiagram::getClasses()
 {
     return classes;
 }
-list <tuple<umlClass*,umlClass*,connectionType,connectionNumber>>
-    umlDiagram::getDependencies()
+list<tuple<umlClass *, umlClass *, connectionType, connectionNumber> > &umlDiagram::getDependencies()
 {
     return dependencies;
 }
