@@ -40,7 +40,7 @@
 1371031932 c:\users\izabela\desktop\projects\bitbucket\umilacz\umltype.h
 	"typedefs.h"
 
-1369426749 c:\users\izabela\desktop\projects\bitbucket\umilacz\typedefs.h
+1371047681 c:\users\izabela\desktop\projects\bitbucket\umilacz\typedefs.h
 	"includes.h"
 
 1370968994 c:\users\izabela\desktop\projects\bitbucket\umilacz\includes.h
@@ -52,7 +52,7 @@
 	<iostream>
 	<fstream>
 
-1371031932 c:\users\izabela\desktop\projects\bitbucket\umilacz\umlfunction.h
+1371047681 c:\users\izabela\desktop\projects\bitbucket\umilacz\umlfunction.h
 	"umlAttribute.h"
 
 1369339581 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umlattributes.cpp
@@ -69,19 +69,20 @@
 	"converter2cpp.h"
 	"converter2java.h"
 
-1369426727 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\typedefs.cpp
+1371047681 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\typedefs.cpp
 	"typedefs.h"
 
-1371031932 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umltype.cpp
+1371047681 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umltype.cpp
 	"umlType.h"
 
-1371031932 c:\users\izabela\desktop\projects\bitbucket\umilacz\umlattribute.h
+1371047681 c:\users\izabela\desktop\projects\bitbucket\umilacz\umlattribute.h
 	"umlType.h"
 
-1371031932 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umlattribute.cpp
+1371047681 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umlattribute.cpp
 	"umlAttribute.h"
+	"typedefs.h"
 
-1371031932 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umlfunction.cpp
+1371047681 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umlfunction.cpp
 	"umlFunction.h"
 
 1371031932 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\umlclass.cpp
@@ -96,15 +97,15 @@
 1371033338 c:\users\izabela\desktop\projects\bitbucket\umilacz\converter.h
 	"umlDiagram.h"
 
-1371038951 c:\users\izabela\desktop\projects\bitbucket\umilacz\converter2cpp.h
+1371047815 c:\users\izabela\desktop\projects\bitbucket\umilacz\converter2cpp.h
 	"converter.h"
 
 1371040382 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\converter2cpp.cpp
 	"converter2cpp.h"
 
-1371039583 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\converter2java.cpp
+1371040560 source:c:\users\izabela\desktop\projects\bitbucket\umilacz\converter2java.cpp
 	"converter2java.h"
 
-1371039097 c:\users\izabela\desktop\projects\bitbucket\umilacz\converter2java.h
+1371047816 c:\users\izabela\desktop\projects\bitbucket\umilacz\converter2java.h
 	"converter.h"
 

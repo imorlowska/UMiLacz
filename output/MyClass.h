@@ -7,6 +7,7 @@
 
 class MyClass: public MyClass2
 {
+	//default:
 	private:
 		myType* attributeNb;
 		static  pair< int, myType* > foo(int param1, myType* param2);

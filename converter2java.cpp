@@ -34,11 +34,13 @@ void converter2java::generateHeaderFile(umlClass* currentClass)
     fillPrivateAttributes(headerFile, currentClass);
     fillProtectedAttributes(headerFile, currentClass);
     fillPublicAttributes(headerFile, currentClass);
+    fillDefaultAttributes(headerFile, currentClass);
 
     headerFile << "\n\t//methods\n";
     fillPrivateFunctions(headerFile, currentClass);
     fillProtectedFunctions(headerFile, currentClass);
     fillPublicFunctions(headerFile, currentClass);
+    fillDefaultFunctions(headerFile, currentClass);
 
     headerFile << "};\n";
     headerFile.close();
@@ -74,6 +76,28 @@ void converter2java::fillDependencyMessage(ofstream& file, umlClass* currentClas
     }
 }
 
+void converter2java::fillDefaultAttributes(ofstream& file, umlClass* currentClass)
+{
+    for(umlAttribute* att:currentClass->getAttributes())
+    {
+        if (att->getAccessability() == none_)
+        {
+            string tmp = att->getString();
+            file << "\t" + trim(tmp) + ";" << endl;
+        }
+    }
+}
+void converter2java::fillDefaultFunctions(ofstream& file, umlClass* currentClass)
+{
+    for(umlFunction* func:currentClass->getFunctions())
+    {
+        if (func->getAccessability() ==none_)
+        {
+            string tmp = func->getString();
+            file << "\t" + trim(tmp) + ";" << endl;
+        }
+    }
+}
 void converter2java::fillPrivateAttributes(ofstream& file, umlClass* currentClass)
 {
     for(umlAttribute* att:currentClass->getAttributes())

@@ -33,6 +33,10 @@ void converter2cpp::generateHeaderFile(umlClass* currentClass)
 
     headerFile << "\n{\n";
 
+    headerFile << "\t//default:\n";
+    fillDefaultAttributes(headerFile, currentClass);
+    fillDefaultFunctions(headerFile, currentClass);
+
     headerFile << "\tprivate:\n";
     fillPrivateAttributes(headerFile, currentClass);
     fillPrivateFunctions(headerFile, currentClass);
@@ -99,6 +103,28 @@ void converter2cpp::fillDependencyMessage(ofstream& file, umlClass* currentClass
     }
 }
 
+void converter2cpp::fillDefaultAttributes(ofstream& file, umlClass* currentClass)
+{
+    for(umlAttribute* att:currentClass->getAttributes())
+    {
+        if (att->getAccessability() == none_)
+        {
+            string tmp = att->getString();
+            file << "\t\t" + trim(tmp) + ";" << endl;
+        }
+    }
+}
+void converter2cpp::fillDefaultFunctions(ofstream& file, umlClass* currentClass)
+{
+    for(umlFunction* func:currentClass->getFunctions())
+    {
+        if (func->getAccessability() == none_)
+        {
+            string tmp = func->getString();
+            file << "\t\t" + trim(tmp) + ";" << endl;
+        }
+    }
+}
 void converter2cpp::fillPrivateAttributes(ofstream& file, umlClass* currentClass)
 {
     for(umlAttribute* att:currentClass->getAttributes())
