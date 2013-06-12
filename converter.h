@@ -8,6 +8,7 @@ class converter
 {
     protected:
         umlDiagram* diagram;
+        void fillAutomatedMessage(ofstream&);
     public:
         virtual void convert(umlDiagram* diagram) = 0;
 };

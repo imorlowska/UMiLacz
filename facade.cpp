@@ -1,12 +1,13 @@
 #include "facade.h"
 #include "converter2cpp.h"
+#include "converter2java.h"
 
 Facade::Facade()
 {
     diagram = new umlDiagram();
 }
 
-void Facade::sample()
+umlDiagram* Facade::sampleDiagram()
 {
     umlBinaryType* t = new umlBinaryType();
     umlSimpleType* t1 = new umlSimpleType();
@@ -40,7 +41,8 @@ void Facade::sample()
     p4->setType(t2)->setAccessability(private_)->setName("attributeNb");
 
     umlClass* c = new umlClass();
-    c->setName("MyClass")->setAccessability(public_)->addFunction(f)->
+    string name = "MyClass";
+    c->setName(name)->setAccessability(public_)->addFunction(f)->
             addFunction(f2)->addAttribute(p3)->addAttribute(p4);
 
 
@@ -52,6 +54,19 @@ void Facade::sample()
 
     //cout << d->getString() << endl;
 
+    return d;
+    //converter2cpp* cpp = new converter2cpp();
+    //cpp->convert(d);
+}
+
+void Facade::generateCpp(umlDiagram* diagram)
+{
     converter2cpp* cpp = new converter2cpp();
-    cpp->convert(d);
+    cpp->convert(diagram);
+}
+
+void Facade::generateJava(umlDiagram* diagram)
+{
+    converter2java* java = new converter2java();
+    java->convert(diagram);
 }

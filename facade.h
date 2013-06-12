@@ -10,7 +10,9 @@ class Facade
         umlDiagram* diagram;
     public:
         Facade();
-        static void sample();
+        static umlDiagram* sampleDiagram();
+        static void generateCpp(umlDiagram*);
+        static void generateJava(umlDiagram*);
 };
 
 #endif

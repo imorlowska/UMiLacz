@@ -14,7 +14,7 @@ class umlClass
         list<umlAttribute*> attributes;
     public:
         umlClass();
-        
+
 		umlClass* setName(const string& n);
         umlClass* setAccessability(accessability a);
 
