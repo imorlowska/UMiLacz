@@ -18,14 +18,16 @@ public:
 		 QObject *parent=0);
 	//ConnectionsModel(QObject *parent=0);
 
-	list<tuple<umlClass*,umlClass*,connectionType,connectionNumber>>
-	getConnections();
+
+	void getConnections(list<tuple<umlClass*,umlClass*,connectionType,connectionNumber>>& conn);
 
 	Q_INVOKABLE
 	QString addConnection(const QVariant& c1, const QVariant& c2, int type, int number);
 
 	Q_INVOKABLE
 	void deleteConnection(const QVariant& conn);
+
+	void removeClassConnections(QClass* cl);
 	virtual ~ConnectionsModel(){}
 signals:
 

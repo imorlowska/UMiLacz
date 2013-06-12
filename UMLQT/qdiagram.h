@@ -35,8 +35,13 @@ public:
 		classes.addEmpty();
 	}
 
+	Q_INVOKABLE void removeClass(const QVariant &cl);
+
 	Q_INVOKABLE
-	void UMiL();
+	void UMiLCpp();
+
+	Q_INVOKABLE
+	void UMiLJava();
 
 signals:
 	void nameChanged();

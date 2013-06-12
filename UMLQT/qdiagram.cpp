@@ -1,7 +1,9 @@
 #include "qdiagram.h"
 #include <tuple>
 using namespace std;
-
+#include "../converter.h"
+#include "../converter2cpp.h"
+#include"../converter2java.h"
 
 QDiagram::QDiagram(umlDiagram *Diagram, QObject *parent):
 	QObject(parent),
@@ -35,30 +37,30 @@ void QDiagram::commitChanges()
 			insert(myDiagram->getClasses().begin(),
 				   newClasses.begin(),newClasses.end());
 
-	list<tuple<umlClass*,umlClass*,connectionType,connectionNumber>>
-			newDependencies = connections.getConnections();
-	myDiagram->getDependencies().clear();
-	for(auto it=newDependencies.begin();it!=newDependencies.end();it++)
-	{
-		umlClass* c1 = get<0>(*it),*c2 = get<1>(*it);
-		connectionType ct = get<2>(*it);
-		connectionNumber cn = get<3>(*it);
-		myDiagram->getDependencies().
-				push_back(
-					tuple<umlClass*,umlClass*,connectionType,connectionNumber>(
-						get<0>(*it),
-						get<1>(*it),
-						get<2>(*it),
-						get<3>(*it)
-						));
-	}
+	connections.getConnections(myDiagram->getDependencies());
+
 //	myDiagram->getDependencies().insert(myDiagram->getDependencies().begin(),
 //										newDependencies.begin(),
-//										newDependencies.end());
+	//										newDependencies.end());
 }
 
-void QDiagram::UMiL()
+void QDiagram::removeClass(const QVariant &cl)
+{
+	QClass* class_ = cl.value<QClass*>();
+	connections.removeClassConnections(class_);
+	classes.removeClass(class_);
+}
+
+void QDiagram::UMiLCpp()
 {
 	commitChanges();
-	//TODO: tutaj mozna wywołac jakas metode do konwertacji
+	converter2cpp* cpp = new converter2cpp();
+		cpp->convert(myDiagram);
+}
+
+void QDiagram::UMiLJava()
+{
+	commitChanges();
+	converter2java* java = new converter2java();
+	java->convert(myDiagram);
 }

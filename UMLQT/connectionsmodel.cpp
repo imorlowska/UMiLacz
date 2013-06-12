@@ -41,17 +41,19 @@ ConnectionsModel::ConnectionsModel
 //{
 //}
 
-list<tuple<umlClass *, umlClass *, connectionType, connectionNumber> > ConnectionsModel::getConnections()
+void ConnectionsModel::
+getConnections(list<tuple<umlClass *, umlClass *,
+		connectionType, connectionNumber> >& conn)
 {
-	list<tuple<umlClass*,umlClass*,connectionType,connectionNumber>> result;
+	conn.clear();
 	for(auto it = m_objects->begin();it!=m_objects->end();it++)
 	{
-		QConnection* conn = (QConnection*)*it;
-		umlClass* c1 = conn->getQClass1()->getClass(),
-				*c2 = conn->getQClass2()->getClass();
-		connectionType ct = conn->getTypeOrig();
-		connectionNumber cn = conn->getNumberOrig();
-		result.push_back
+		QConnection* qconn = (QConnection*)*it;
+		umlClass* c1 = qconn->getQClass1()->getClass(),
+				*c2 = qconn->getQClass2()->getClass();
+		connectionType ct = qconn->getTypeOrig();
+		connectionNumber cn = qconn->getNumberOrig();
+		conn.push_back
 				(tuple<umlClass*,umlClass*,connectionType,connectionNumber>
 						 (c1,
 						  c2,
@@ -79,8 +81,10 @@ QString ConnectionsModel::addConnection(const QVariant &c1, const QVariant &c2,i
 		for(auto it = m_objects->begin();it!=m_objects->end();it++)
 		{
 			QConnection* existing = (QConnection*)*it;
-			if((existing->getClass1() == c1 && existing->getClass2() == c2)||
+			if(((existing->getClass1() == c1 && existing->getClass2() == c2)||
 					(existing->getClass1() == c2 && existing->getClass2()==c1))
+					&& (existing->getTypeOrig()==connectionType::contains_ ||
+						existing->getTypeOrig()==connectionType::other_))
 				return "Composition is already defined!\n Use 0..* to 0..* if you want many to many relations";
 		}
 	}
@@ -103,6 +107,19 @@ void ConnectionsModel::deleteConnection(const QVariant &conn)
 		}
 	}
 }
+
+void ConnectionsModel::removeClassConnections(QClass *cl)
+{
+	for(int i=0;i<count();i++)
+	{
+		if(((QConnection*)at(i))->getQClass1() == cl
+				|| ((QConnection*)at(i))->getQClass2()==cl)
+		{
+			remove(i);
+		}
+	}
+}
+
 
 
 /*void ConnectionsModel::populate(const map<pair<QClass *, QClass *>,

@@ -26,6 +26,7 @@ class umlFunction
         list<specialType> getSpecialType();
 		list<umlAttribute*>& getParams();
         string getString();
+		string getFancyString();
 };
 
 #endif

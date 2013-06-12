@@ -16,9 +16,12 @@ enum complexTypeUnary {list_, set_, multiset_};
 enum complexTypeBinary {map_, multimap_, hashmap_, multihashmap_, pair_};
 
 string getStringT(accessability a);
+string getAccessibilityString(accessability a);
 string getStringT(simpleType s);
 string getStringT(complexTypeUnary c);
 string getStringT(complexTypeBinary c);
 string getStringT(specialType s);
+
+accessability getBySymbol(char c);
 
 #endif

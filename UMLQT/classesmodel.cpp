@@ -9,8 +9,22 @@ ClassesModel::ClassesModel(const list<umlClass *> &listOfClasses, QObject *paren
 
 void ClassesModel::addEmpty()
 {
-	append(new QClass((new umlClass())->setName("bar")));
+	append(new QClass((new umlClass())->setName("bar")->setAccessability(public_)));
 }
+
+void ClassesModel::removeClass(QClass *cl)
+{
+	for(int i=0;i<count();i++)
+	{
+		if(at(i) == cl)
+		{
+			remove(i);
+			return;
+		}
+	}
+}
+
+
 
 list<umlClass *> ClassesModel::getClasses()
 {

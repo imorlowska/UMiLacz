@@ -99,6 +99,10 @@ umlType *umlType::getByString(const string &type)
 	{
 		return (new umlSimpleType())->setType(simpleType::string_);
 	}
+	else if(type == "void")
+	{
+		return NULL;
+	}
 	else
 	{
 		return (new umlInternalType())->setType(type);

@@ -19,6 +19,18 @@ string getStringT(accessability a)
                             break;
     }
 }
+string getAccessibilityString(accessability a)
+{
+	switch (a)
+	{
+		case private_:      return "-";
+		case public_:       return "+";
+		case default_:      return "";
+		case protected_:    return "#";
+		case none_:         return "";
+		default:			return "@";
+	}
+}
 string getStringT(simpleType s)
 {
     switch (s)
@@ -86,4 +98,20 @@ string getStringT(specialType s)
         default:            return "Type error!";
                             break;
     }
+}
+
+
+accessability getBySymbol(char c)
+{
+	switch (c)
+	{
+	case '+':
+		return accessability::public_;
+	case '-':
+		return accessability::private_;
+	case '#':
+		return accessability::protected_;
+	default:
+		return accessability::none_;
+	}
 }

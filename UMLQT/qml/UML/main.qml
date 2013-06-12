@@ -7,6 +7,8 @@ Rectangle {
 	width: 500
 	height: 360
 
+
+
 	Rectangle {
 		id: editorPane
 		x: 100
@@ -77,6 +79,12 @@ Rectangle {
 			}
 		}
 
+
+		function deleteClass(cls)
+		{
+			myDiagram.removeClass(cls);
+		}
+
 		Repeater
 		{
 			id:repeater
@@ -91,6 +99,7 @@ Rectangle {
 			myClass:object
 			myFunctions:object.functions
 			myAttributes:object.attributes
+			diagram:myDiagram
 			z:repeater.maxZ
 			mouseArea.onPressed:
 			{
@@ -319,11 +328,22 @@ Rectangle {
 
 			Button {
 				width: editorToolbar.width
-				name: "UMiL"
+				name: "UMiL   (C++)"
 				mousearea.onClicked:
 				{
 
-					myDiagram.UMiL();
+					myDiagram.UMiLCpp();
+
+				}
+			}
+
+			Button {
+				width: editorToolbar.width
+				name: "UMiL   (Java)"
+				mousearea.onClicked:
+				{
+
+					myDiagram.UMiLJava();
 
 				}
 			}

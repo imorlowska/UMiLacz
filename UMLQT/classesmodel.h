@@ -3,6 +3,7 @@
 
 #include "qobjectlistmodel.h"
 #include "qclass.h"
+#include <QVariant>
 
 #include <list>
 using namespace std;
@@ -13,6 +14,7 @@ class ClassesModel:public QObjectListModel
 public:
 	ClassesModel(const list<umlClass *> &listOfClasses, QObject *parent=0);
 	Q_INVOKABLE void addEmpty();
+	void removeClass(QClass* cl);
 	list<umlClass*> getClasses();
 	virtual ~ClassesModel(){}
 };

@@ -59,6 +59,10 @@ Item
                             }
 
                             Keys.onDeletePressed:rectDelete.deleteCurrent()
+							Keys.onReturnPressed:
+							{
+								fieldName.focus=false;
+							}
 
 
 

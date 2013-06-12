@@ -33,7 +33,9 @@ SOURCES += main.cpp \
     classesmodel.cpp \
     ../umlDiagram.cpp \
     qconnection.cpp \
-    connectionsmodel.cpp
+    connectionsmodel.cpp \
+    ../converter2cpp.cpp \
+    ../converter2java.cpp
 
 # Installation path
 # target.path =
@@ -58,6 +60,8 @@ HEADERS += \
     classesmodel.h \
     ../umlDiagram.h \
     qconnection.h \
-    connectionsmodel.h
+    connectionsmodel.h \
+    ../converter2cpp.h \
+    ../converter2java.h
 
 

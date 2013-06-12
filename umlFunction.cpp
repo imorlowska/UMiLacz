@@ -3,7 +3,7 @@
 umlFunction::umlFunction():type(nullptr)
 {
     name = "foo";
-    accessability_ = none_;
+	accessability_ = public_;
 }
 umlFunction* umlFunction::setName(string n)
 {
@@ -93,4 +93,39 @@ string umlFunction::getString()
 	}
 	return getStringT(accessability_) +" " + spec +" "+ typeString + " "
                     + name + param;
+}
+
+
+string umlFunction::getFancyString()
+{
+	string spec;
+	for (list<specialType>::iterator it = sType.begin();
+			it != sType.end(); ++it)
+	{
+		spec += getStringT(*it);
+	}
+	string param;
+	for (list<umlAttribute*>::iterator it = params.begin();
+			it != params.end(); ++it)
+	{
+		param += (*it)->getName() + " " + (*it)->getType()->getString() + ", ";
+	}
+	if(param.length()>2)
+	{
+		param.pop_back();
+		param.pop_back();
+	}
+	param = "(" + param + ")";
+
+	string typeString;
+	if(type==nullptr)
+	{
+		typeString="void";
+	}
+	else
+	{
+		typeString=type->getString();
+	}
+	return getAccessibilityString(accessability_)+' ' + typeString + " "
+					+ name + param;
 }

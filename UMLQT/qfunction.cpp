@@ -3,7 +3,7 @@
 
 QFunction::QFunction(umlFunction* func, QObject *parent):QObject(parent),function(func),correct(true)
 {
-	tmpName = QString::fromStdString(function->getString());
+	tmpName = QString::fromStdString(function->getFancyString());
 }
 
 QString QFunction::getName() const
@@ -22,7 +22,7 @@ void QFunction::setName(const QString &name)
 
 void QFunction::commit()
 {
-		string old = function->getString();
+		string old = function->getFancyString();
 		if (tmpName == QString::fromStdString(old))
 		{
 			correct=true;
@@ -31,7 +31,7 @@ void QFunction::commit()
 		}
 
 		if(!parse(tmpName))return;
-		string str = function->getString();
+		string str = function->getFancyString();
 		if(tmpName.toStdString() != str)
 		{
 			tmpName = QString::fromStdString(str);
@@ -43,13 +43,14 @@ void QFunction::commit()
 bool QFunction::parse(const QString &str)
 {
 	list<pair<string,string>> attributes;
-	QString retType,name;
-	QRegExp reg("[\\+\\-]?\\s*([A-Za-z_]\\w*|)\\s+([A-Za-z_]\\w*)\\s*\\((.*)\\)");
+	QString retType,name,access;
+	QRegExp reg("\\s*([#\\+\\-])?\\s*\\s*([A-Za-z_]\\w*|)\\s+([A-Za-z_]\\w*)\\s*\\((.*)\\)");
 	if(reg.exactMatch(str))
 	{
-		retType = reg.cap(1);
-		name = reg.cap(2);
-		QString params = reg.cap(3);
+		access = reg.cap(1);
+		retType = reg.cap(2);
+		name = reg.cap(3);
+		QString params = reg.cap(4);
 		if(!params.isEmpty())
 		{
 			QRegExp pars("(([A-Za-z_]\\w*)\\s+([A-Za-z_]\\w*)\\s*)(,\\s*([A-Za-z_]\\w*)\\s+([A-Za-z_]\\w*)\\s*)*");
@@ -88,6 +89,12 @@ bool QFunction::parse(const QString &str)
 		}
 		return false;
 	}
+		if(access.isEmpty())
+			function->setAccessability(accessability::default_);
+		else
+		{
+			function->setAccessability(getBySymbol(access[0].toLatin1()));
+		}
 		function->setName(name.toStdString());
 		function->setType(umlType::getByString(retType.toStdString()));
 		list<umlAttribute*>& realParams = function->getParams();

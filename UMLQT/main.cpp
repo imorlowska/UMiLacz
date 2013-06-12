@@ -24,13 +24,13 @@ void createModel()
 //  return model;
 
 	umlClass* c1 = new umlClass();
-	c1->setName("shitClass");
+	c1->setName("shitClass")->setAccessability(public_);
 
 
-	c1->addFunction((new umlFunction())->setName("func")->
-					setType(((new umlSimpleType())->setType(int_))));
-	c1->addFunction((new umlFunction())->setName("func2"));
-	c1->addFunction((new umlFunction())->setName("func3"));
+	c1->addFunction((new umlFunction())->setName("func")->setAccessability(accessability::public_)
+					->setType(((new umlSimpleType())->setType(int_))));
+	c1->addFunction((new umlFunction())->setName("func2")->setAccessability(accessability::protected_));
+	c1->addFunction((new umlFunction())->setName("func3")->setAccessability(accessability::private_));
 
 	c1->addAttribute(
 				(new umlAttribute())->
@@ -39,11 +39,11 @@ void createModel()
 
 	diagram.addClass(c1);
 	umlClass* c2 = new umlClass();
-	c2->setName("crapClass");
+	c2->setName("crapClass")->setAccessability(public_);
 
 
 	umlClass* c3 = new umlClass();
-	c3->setName("scumClass");
+	c3->setName("scumClass")->setAccessability(public_);
 
 
 

@@ -14,6 +14,7 @@ Rectangle
 	property variant myClass
 	property variant myAttributes
 	property variant myFunctions
+	property variant diagram
 	//color:myClass.backgroundColor
 
     onWidthChanged:
@@ -40,6 +41,11 @@ Rectangle
 		}
 
     }
+	Keys.onDeletePressed:
+	{
+		diagram.removeClass(myClass);
+	}
+
     Column
     {
         id: mainColumn
@@ -81,6 +87,10 @@ Rectangle
 				{
 					target:className
 					onTextChanged:{myClass.name=className.text}
+				}
+				Keys.onReturnPressed:
+				{
+					className.focus=false;
 				}
 
 //				Binding
